@@ -1,13 +1,41 @@
 @import '~bootstrap/scss/bootstrap';
 
+$font-family: 'Lobster Regular';
+$bg-color: rgba(92, 255, 228, 0.767); 
+$text-color: red;
 
-h1 {
-    font-family: 'Lobster Regular';
-    src: url('public/Lobster-Regular.ttf') format('cursive');
-    text-align: center;
-    color: red;
+
+
+@font-face {
+  font-family: 'Lobster Regular';
+  src: url('public/Lobster-Regular.ttf') format('TrueType');
 }
-h2 {
-    color: red;
-
+body {
+  background-color: $bg-color;
+}
+h1 {
+    font-family: $font-family;
+    text-align: center;
+    color: $text-color; 
+    font-size: 100px;
+}
+h2, h3, h4 {
+  color: $text-color;
+  font-size: 30px;
+}
+.game-board {
+   display: grid;
+    grid-template-columns: repeat(3, auto);
+    width: 306px;
+    margin: 50px auto;
+}
+.cell {
+  font-family: $font-family;
+    width: 100px;
+    height: 100px;
+    box-shadow: 0 0 0 1px #333333;
+    border: 1px solid #333333;
+    cursor: pointer;
+line-height: 100px;
+    font-size: 60px;
 }

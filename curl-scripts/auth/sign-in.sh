@@ -1,4 +1,4 @@
-# VARIABLE=VALUE sh curl-scripts/auth/sign-in.sh
+#!/bin/bash
 
 curl "https://tic-tac-toe-api-development.herokuapp.com/sign-in" \
   --include \

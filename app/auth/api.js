@@ -3,7 +3,7 @@
 const store = require('../store.js')
 
 const signUp = function (data) {
-  console.log(data)
+  console.log(store)
   return $.ajax({
     method: 'POST',
     url: 'https://tic-tac-toe-api-development.herokuapp.com/sign-up',
@@ -12,7 +12,6 @@ const signUp = function (data) {
 }
 
 const signIn = function (data) {
-  console.log(data)
   return $.ajax({
     method: 'POST',
     url: 'https://tic-tac-toe-api-development.herokuapp.com/sign-in',
@@ -29,7 +28,7 @@ const signOut = function () {
   })
 }
 
-module.export = {
+module.exports = {
   signUp,
   signIn,
   signOut
