@@ -9,7 +9,7 @@ const createGame = function () {
     method: 'POST',
     url: config.apiUrl + '/games',
     headers: {
-      Authorization: 'Token token=' + store.user.token
+      Authorization: 'Bearer ' + store.user.token
     },
     data: ''
   })
@@ -19,7 +19,7 @@ const updateGame = function (index, value, over) {
     method: 'PATCH',
     url: config.apiUrl + '/games/' + store.game.id,
     headers: {
-      Authorization: 'Token token=' + store.user.token
+      Authorization: 'Bearer ' + store.user.token
     },
     data: {
       game: {

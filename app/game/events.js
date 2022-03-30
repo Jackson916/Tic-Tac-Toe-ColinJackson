@@ -132,7 +132,7 @@ const onClickBoard = function (event) {
         gameUi.onGameOver(currentPlayer)
       } else if (checkTie()) {
         gameOver = true
-        gameUi.onGetTieMessage()
+        gameUi.onTieGame()
       } else {
         changePlayer()
         gameUi.onCurrentPlayerTurn(currentPlayer)

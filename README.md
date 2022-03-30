@@ -11,3 +11,8 @@ User story
 
 Wireframe 
 ![Wireframe](https://app.moqups.com/HSZVxaPirmQBWC40Ib8i19VmZTwPcO1T/edit/page/ad64222d5) 
+
+Acknowledgements:
+Web Dev simplified (youtube)
+JavaScript. Plain english (website)
+various older git hub from issue trackers
