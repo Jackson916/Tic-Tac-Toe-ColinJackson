@@ -1,29 +1,60 @@
 'use strict'
+const store = require('../store')
 
-const store = require('../store.js')
-
-const onCreateGameSuccess = function (response) {
-  $('#game-display').html('<p>User signed up successfully</p>')
-  store.game = response.game
+const successMessage = function (newText) {
+  $('#game-message').text(newText)
+  $('#game-message').hide('failure')
+  $('#game-message').show('success')
+  $('form').trigger('reset')
 }
+
+const failureMessage = function (newText) {
+  $('#game-message').text(newText)
+  $('#game-message').hide('success')
+  $('#game-message').show('failure')
+}
+
+const onCreateGameSuccess = function (responseData) {
+  successMessage('New game created successfully! X goes first!')
+  store.game = responseData.game
+}
+
 const onCreateGameFailure = function () {
-  $('#game-display').html('<p>User signed up successfully</p>')
+  failureMessage('New game creation failed')
 }
-const onUpdateGameSuccess = function (response) {
-  $('#game-display').html('<p>Game Restarted</p>')
-  store.game = response.game
+
+const onUpdateGameSuccess = function (responseData) {
+  store.game = responseData.game
 }
+
 const onUpdateGameFailure = function () {
-  $('#game-display').html('<p>Game Failed To Restart</p>')
+  failureMessage('Error: game was not updated in API')
 }
+
+const onBoxOccupied = function () {
+  failureMessage('This space is already taken. Choose an empty space!')
+}
+
 const onCurrentPlayerTurn = function (currentPlayer) {
-  $('#game-display').html('<p>currentPlayer + "turn to choose."</p>')
+  $('#game-message').hide('failure')
+  $('#game-message').hide('success')
+  $('#game-message').text(
+    'It is ' + currentPlayer + "'s turn to choose a space!"
+  )
 }
-const onTieGame = function () {
-  $('#game-display').html('<p>Tie Game!</p>')
-}
+
 const onGameOver = function (currentPlayer) {
-  $('#game-display').html('<p>currentPlayer + "Wins!"</p>')
+  $('#game-message').hide('failure')
+  $('#game-message').show('success')
+  successMessage(
+    currentPlayer + " wins! Press 'New Game' button to play again!"
+  )
+}
+
+const onGetTieMessage = function () {
+  $('#game-message').hide('failure')
+  $('#game-message').hide('success')
+  $('#game-message').text('It is a tie game.')
 }
 
 module.exports = {
@@ -31,7 +62,8 @@ module.exports = {
   onCreateGameFailure,
   onUpdateGameSuccess,
   onUpdateGameFailure,
-  onCurrentPlayerTurn,
-  onTieGame,
-  onGameOver
+  onBoxOccupied,
+  onGameOver,
+  onGetTieMessage,
+  onCurrentPlayerTurn
 }
