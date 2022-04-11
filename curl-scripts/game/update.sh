@@ -6,17 +6,16 @@ URL_PATH="/games"
 curl "${API}${URL_PATH}/${ID}" \
   --include \
   --request PATCH \
-  --header "Authorization: Bearer ${TOKEN}"  \
-  --header "Content-type: application/json" \
-  --data `{
+  --header "Content-Type: application/json" \
+  --header "Authorization: Bearer ${TOKEN}" \
+  --data '{
     "game": {
-        "cell": {
+      "cell": {
         "index": "'"${INDEX}"'",
-         "value": "'"${VALUE}"'"
-    },
-     "over": "'"${OVER}"'"
-  }
-}`
-
+        "value": "'"${VALUE}"'"
+      },
+      "over": "'"${OVER}"'"
+    }
+  }'
 
 echo
