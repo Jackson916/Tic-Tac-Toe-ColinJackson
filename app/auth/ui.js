@@ -7,6 +7,7 @@ const onSignUpSuccess = function () {
   $('#sign-up-form').trigger('reset')
   $('#sign-up-form').hide()
   $('h2').hide()
+  $('#create-game').show()
 }
 
 const onSignUpFailure = function () {
@@ -17,8 +18,13 @@ const onSignInSuccess = function (response) {
   $('#auth-display').html('<p>User signed in successfully</p>')
 
   $('form').trigger('reset')
+
   $('#sign-in-form').hide()
   $('h3').hide()
+  $('#new-game').show()
+  $('#sign-out-form').show()
+  $('#sign-up-form').hide()
+  $('#sign-in-form').hide()
 
   console.log(response)
   store.user = response.user
@@ -29,6 +35,12 @@ const onSignInFailure = function () {
 }
 const onSignOutSuccess = function () {
   $('#auth-display').html('<p>User signed out successfully</p>')
+
+  $('#sign-out').hide()
+  $('#new-game').hide()
+  $('#sign-up').show()
+  $('#sign-in').show()
+  $('#game-board').hide()
 
   $('form').trigger('reset')
 }
