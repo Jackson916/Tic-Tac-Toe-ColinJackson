@@ -3,7 +3,8 @@
 const gameApi = require('./Api.js')
 const gameUi = require('./Ui.js')
 const store = require('../store')
-
+// removes all X and O from board
+// X is First move
 const onCreateGame = function (event) {
   event.preventDefault()
   gameApi
@@ -20,6 +21,7 @@ const changePlayer = function () {
     currentPlayer = 'X'
   }
 }
+// checks for Win for X or O
 const checkWin = function () {
   const space0 = $('#0').text()
   const space1 = $('#1').text()
@@ -89,6 +91,8 @@ const checkWin = function () {
   }
   return ''
 }
+// Checks for a tie returns true if there is false if it is not.
+
 const checkTie = function () {
   const space0 = $('#0').text()
   const space1 = $('#1').text()
@@ -116,7 +120,7 @@ const checkTie = function () {
 
   return true
 }
-
+// checks if game is active
 const onClickBoard = function (event) {
   event.preventDefault()
   if (store.game && store.game.over === false) {
