@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash 
 
 API="https://tic-tac-toe-api-development.herokuapp.com"
 URL_PATH="/games"
