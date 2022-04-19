@@ -4,12 +4,6 @@ $font-family: 'Lobster Regular';
 $bg-color: rgba(92, 255, 228, 0.767); 
 $text-color: red;
 
-
-
-@font-face {
-  font-family: 'Lobster Regular';
-  src: url('public/Lobster-Regular.ttf') format('TrueType');
-}
 body {
   background-color: $bg-color;
 }
