@@ -14,10 +14,10 @@ const createGame = function () {
     data: ''
   })
 }
-const updateGame = function (index, value, gameOver) {
+const updateGame = (index, value, gameOver) => {
   return $.ajax({
     method: 'PATCH',
-    url: config.apiUrl + '/games/' + store.game.id,
+    url: config.apiUrl + '/games/' + store.game._id,
     headers: {
       Authorization: 'Bearer ' + store.user.token
     },

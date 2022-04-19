@@ -5,9 +5,6 @@ const onSignUpSuccess = function () {
   $('#auth-display').html('<p>User signed up successfully</p>')
 
   $('#sign-up-form').trigger('reset')
-  $('#sign-up-form').hide()
-  $('h2').hide()
-  $('#create-game').show()
 }
 
 const onSignUpFailure = function () {
@@ -19,14 +16,16 @@ const onSignInSuccess = function (response) {
 
   $('form').trigger('reset')
 
+  $('.header2').hide()
   $('#sign-in-form').hide()
-  $('h3').hide()
-  $('#new-game').show()
-  $('#sign-out-form').show()
+  $('.header3').hide()
+  $('#game-message').show()
   $('#sign-up-form').hide()
-  $('#sign-in-form').hide()
+  $('#sign-out-button').show()
 
-  console.log(response)
+  $('.box').show()
+  $('#create-game').show()
+
   store.user = response.user
 }
 
@@ -36,12 +35,15 @@ const onSignInFailure = function () {
 const onSignOutSuccess = function () {
   $('#auth-display').html('<p>User signed out successfully</p>')
 
-  $('#sign-out').hide()
-  $('#new-game').hide()
-  $('#sign-up').show()
-  $('#sign-in').show()
-  $('#game-board').hide()
+  $('#sign-out-button').hide()
+  $('#create-game').hide()
+  $('.box').hide()
 
+  $('.header2').show()
+  $('#sign-in-form').show()
+  $('.header3').show()
+  $('#sign-up-form').show()
+  $('#game-message').hide()
   $('form').trigger('reset')
 }
 

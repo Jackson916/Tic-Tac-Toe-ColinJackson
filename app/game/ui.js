@@ -2,16 +2,17 @@
 const store = require('../store')
 
 const successMessage = function (newText) {
+  // reusable function to display text
   $('#game-message').text(newText)
-  $('#game-message').hide('failure')
-  $('#game-message').show('success')
+  $('#game-message').removeClass('failure')
+  $('#game-message').addClass('success')
   $('form').trigger('reset')
 }
 
 const failureMessage = function (newText) {
   $('#game-message').text(newText)
-  $('#game-message').hide('success')
-  $('#game-message').show('failure')
+  $('#game-message').removeClass('success')
+  $('#game-message').addClass('failure')
 }
 
 const onCreateGameSuccess = function (responseData) {
@@ -36,34 +37,40 @@ const onBoxOccupied = function () {
 }
 
 const onCurrentPlayerTurn = function (currentPlayer) {
-  $('#game-message').hide('failure')
-  $('#game-message').hide('success')
+  $('#game-message').removeClass('failure')
+  $('#game-message').removeClass('success')
   $('#game-message').text(
     'It is ' + currentPlayer + "'s turn to choose a space!"
   )
 }
 
-const onGameOver = function (currentPlayer) {
-  $('#game-message').hide('failure')
-  $('#game-message').show('success')
+const onGameIsOver = function (currentPlayer) {
+  $('#game-message').removeClass('failure')
+  $('#game-message').removeClass('success')
   successMessage(
     currentPlayer + " wins! Press 'New Game' button to play again!"
   )
 }
 
 const onGetTieMessage = function () {
-  $('#game-message').hide('failure')
-  $('#game-message').hide('success')
+  $('#game-message').removeClass('failure')
+  $('#game-message').removeClass('success')
   $('#game-message').text('It is a tie game.')
 }
 
+const onMustStartGameMessage = function () {
+  $('#game-message').removeClass('failure')
+  $('#game-message').removeClass('success')
+  $('#game-message').text("You must click the 'New Game' button to play.")
+}
 module.exports = {
   onCreateGameSuccess,
   onCreateGameFailure,
   onUpdateGameSuccess,
   onUpdateGameFailure,
   onBoxOccupied,
-  onGameOver,
+  onGameIsOver,
   onGetTieMessage,
+  onMustStartGameMessage,
   onCurrentPlayerTurn
 }

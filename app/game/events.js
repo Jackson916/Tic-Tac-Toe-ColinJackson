@@ -1,17 +1,10 @@
 'use strict'
 
-const gameApi = require('./Api.js')
-const gameUi = require('./Ui.js')
+// const getFormFields = require('../../../lib/get-form-fields')
+const api = require('./api.js')
+const ui = require('./ui.js')
 const store = require('../store')
-// removes all X and O from board
-// X is First move
-const onCreateGame = function (event) {
-  event.preventDefault()
-  gameApi
-    .createGame()
-    .catch(gameUi.onCreateGameFailure)
-    .then(gameUi.onCreateGameSuccess)
-}
+
 let currentPlayer = 'X'
 
 const changePlayer = function () {
@@ -21,7 +14,16 @@ const changePlayer = function () {
     currentPlayer = 'X'
   }
 }
-// checks for Win for X or O
+
+// X as the first player to go
+const onCreateGame = function (event) {
+  event.preventDefault()
+  $('.box').text('')
+  currentPlayer = 'X'
+  api.createGame().then(ui.onCreateGameSuccess).catch(ui.onCreateGameFailure)
+}
+
+// checkWin returns 'X' for X wins or 'O' for O wins
 const checkWin = function () {
   const space0 = $('#0').text()
   const space1 = $('#1').text()
@@ -35,8 +37,10 @@ const checkWin = function () {
 
   if (space0 === space1 && space0 === space2) {
     if (space0 === 'X') {
+      // $('#game-message').text('X wins')
       return 'X'
     } else if (space0 === 'O') {
+      // $('#game-message').text('O wins')
       return 'O'
     }
   }
@@ -91,8 +95,9 @@ const checkWin = function () {
   }
   return ''
 }
-// Checks for a tie returns true if there is false if it is not.
 
+// checkTie returns false if there is not a tie, returns true if there
+// are no empty strings
 const checkTie = function () {
   const space0 = $('#0').text()
   const space1 = $('#1').text()
@@ -104,6 +109,8 @@ const checkTie = function () {
   const space7 = $('#7').text()
   const space8 = $('#8').text()
 
+  // check to see if board spaces have empty string and return
+  // false if there is an empty string
   if (
     space0 === '' ||
     space1 === '' ||
@@ -117,38 +124,53 @@ const checkTie = function () {
   ) {
     return false
   }
-
+  // check for win first
   return true
 }
-// checks if game is active
+
+// onClickBoard checks to see if a game is stored and if the game is active
 const onClickBoard = function (event) {
   event.preventDefault()
   if (store.game && store.game.over === false) {
+    // if space is blank, then add the X or O
     if ($(event.target).text() === '') {
       $(event.target).text(currentPlayer)
+      // save value to currentTurn to send to API
       const currentTurn = currentPlayer
-
+      // winner is storing 'X' or 'O' for winner or ''
       const winner = checkWin()
 
       let gameOver = winner !== ''
-
       if (gameOver) {
-        gameUi.onGameOver(currentPlayer)
+        ui.onGameIsOver(currentPlayer)
       } else if (checkTie()) {
         gameOver = true
-        gameUi.onTieGame()
+
+        ui.onGetTieMessage()
       } else {
         changePlayer()
-        gameUi.onCurrentPlayerTurn(currentPlayer)
+        ui.onCurrentPlayerTurn(currentPlayer)
       }
-      gameApi.updateGame(event.target.id, currentTurn, gameOver)
-        .then(gameUi.onUpdateGameSuccess)
-        .catch(gameUi.onUpdateGameFailure)
+
+      api
+        .updateGame(event.target.id, currentTurn, gameOver)
+        .then(ui.onUpdateGameSuccess)
+        .catch(ui.onUpdateGameFailure)
+    } else {
+      ui.onBoxOccupied()
     }
+  } else {
+    ui.onMustStartGameMessage()
   }
+}
+
+const onGamesPlayed = function () {
+  event.preventDefault()
+  api.getGamesPlayed().then(ui.onGetGamesSuccess).catch(ui.onGetGamesFailure)
 }
 
 module.exports = {
   onCreateGame,
-  onClickBoard
+  onClickBoard,
+  onGamesPlayed
 }
