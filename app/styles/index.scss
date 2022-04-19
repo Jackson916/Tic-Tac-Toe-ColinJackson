@@ -1,0 +1,36 @@
+@import '~bootstrap/scss/bootstrap';
+
+$font-family: 'Lobster Regular';
+$bg-color: rgba(92, 255, 228, 0.767); 
+$text-color: red;
+
+body {
+  background-color: $bg-color;
+}
+h1 {
+    font-family: $font-family;
+    text-align: center;
+    color: $text-color; 
+    font-size: 100px;
+}
+h2, h3, h4 {
+  color: $text-color;
+  font-size: 30px;
+}
+.game-board {
+   max-width: 1700px;
+  min-width: 300px;
+  width: 50%;
+}
+.box {
+  align-items: center;
+  background-color: white;
+  border: 1px solid black;
+  display: flex;
+  height: 80px;
+  cursor: pointer;
+  justify-content: center;
+}
+.start-game {
+  margin: 50px;
+}
