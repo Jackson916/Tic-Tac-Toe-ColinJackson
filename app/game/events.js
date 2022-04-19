@@ -164,13 +164,7 @@ const onClickBoard = function (event) {
   }
 }
 
-const onGamesPlayed = function () {
-  event.preventDefault()
-  api.getGamesPlayed().then(ui.onGetGamesSuccess).catch(ui.onGetGamesFailure)
-}
-
 module.exports = {
   onCreateGame,
-  onClickBoard,
-  onGamesPlayed
+  onClickBoard
 }
