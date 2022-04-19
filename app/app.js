@@ -12,4 +12,7 @@ $(() => {
   $('#sign-out-button').on('click', authEvents.onSignOut)
   $('#create-game').on('click', gameEvents.onCreateGame)
   $('.box').on('click', gameEvents.onClickBoard)
+  $('#sign-out-button').hide()
+  $('.box').hide()
+  $('#create-game').hide()
 })
