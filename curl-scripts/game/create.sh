@@ -7,6 +7,6 @@ curl "${API}${URL_PATH}" \
   --include \
   --request POST \
   --header "Authorization: Bearer ${TOKEN}"  \
-  --data ''
+  --data '{}'
 
 echo

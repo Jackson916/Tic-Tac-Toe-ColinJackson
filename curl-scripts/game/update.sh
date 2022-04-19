@@ -14,7 +14,7 @@ curl "${API}${URL_PATH}/${ID}" \
         "index": "'"${INDEX}"'",
         "value": "'"${VALUE}"'"
       },
-      "over": "'"${OVER}"'"
+      "over": "'"${GAMEOVER}"'"
     }
   }'
 
